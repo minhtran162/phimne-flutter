@@ -47,5 +47,9 @@
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+		<key>io.flutter.embedded_views_preview</key>
+		<true/>
+		<key>UIUserInterfaceStyle</key>
+		<string>System</string>
 	</dict>
 </plist>
