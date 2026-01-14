@@ -1,18 +1,16 @@
+import 'dart:io';
+import 'util.dart';
 import 'dart:async';
-import 'package:flutter/foundation.dart';
+import 'constants.dart';
+import 'dart:collection';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'dart:io';
-import 'dart:collection';
-import 'package:flutter/services.dart'
-    show MethodChannel, SystemChrome, SystemUiMode, SystemNavigator;
-
-import 'constants.dart';
-import 'util.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter/services.dart' show MethodChannel, SystemChrome, SystemUiMode, SystemNavigator;
 
 // === DEBUG FLAGS ===
 // Set this to FALSE if the app fails to load (white screen) to confirm if NativeShell is the cause.
@@ -579,7 +577,9 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                                   },
                                   onProgressChanged: (controller, progress) {
                                     if (progress == 100) {
-                                      debugPrint("WebView loaded 100%");
+                                      setState(() {
+                                        isLoading = false;
+                                      });
                                     }
                                   },
                                   onConsoleMessage:
