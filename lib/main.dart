@@ -65,50 +65,34 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   InAppWebViewController? webViewController;
   late Future<bool> _networkCheckFuture;
 
-  static String getJellyfinUserAgent() {
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.iOS:
-        return 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X; Phim Ne iOS) '
-            'AppleWebKit/605.1.15 (KHTML, like Gecko) '
-            'Version/17.0 Mobile/15E148 Safari/604.1';
-
-      case TargetPlatform.macOS:
-        return 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0; Phim Ne macOS) '
-            'AppleWebKit/605.1.15 (KHTML, like Gecko) '
-            'Version/17.0 Safari/605.1.15';
-
-      default:
-        return 'Mozilla/5.0 (Phim Ne) AppleWebKit/537.36 (KHTML, like Gecko)';
-    }
-  }
-
   InAppWebViewSettings sharedSettings = InAppWebViewSettings(
+    // --- UI & INTERACTION SETTINGS ---
     supportZoom: false,
-    clearSessionCache: true,
     transparentBackground: false,
-    limitsNavigationsToAppBoundDomains: true,
-    javaScriptCanOpenWindowsAutomatically: true,
-    iframeAllowFullscreen: true,
-    allowsInlineMediaPlayback: true,
-
-    // Hide the default scrollbars within the webview content itself
     disallowOverScroll: true,
     disableVerticalScroll: false,
     disableHorizontalScroll: true,
     verticalScrollBarEnabled: false,
     horizontalScrollBarEnabled: false,
-
-    // Disable the back/forward swipe gestures.
     allowsBackForwardNavigationGestures: false,
 
-    // Enable the shouldOverrideUrlLoading event.
-    useShouldOverrideUrlLoading: true,
+    // --- CACHE & SESSION SETTINGS ---
+    clearSessionCache: true,
     cacheEnabled: false,
     cacheMode: CacheMode.LOAD_NO_CACHE,
-    userAgent: getJellyfinUserAgent(),
+
+    // --- MEDIA SETTINGS ---
+    mediaPlaybackRequiresUserGesture: false,
+    iframeAllowFullscreen: true,
+    allowsInlineMediaPlayback: true,
+
+    // --- NAVIGATION & SECURITY SETTINGS ---
+    limitsNavigationsToAppBoundDomains: true,
+    javaScriptCanOpenWindowsAutomatically: true,
+    useShouldOverrideUrlLoading: true,
     useOnLoadResource: true,
 
-    // iOS specific - ensure hardware acceleration
+    // --- iOS SPECIFIC SETTINGS ---
     allowsLinkPreview: false,
     ignoresViewportScaleLimits: true,
     suppressesIncrementalRendering: false, // Don't suppress rendering!
